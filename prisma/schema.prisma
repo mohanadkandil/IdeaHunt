@@ -1,0 +1,63 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id             String    @id @default(cuid())
+  name           String
+  email          String?   @unique
+  password       String?
+  emailVerfied   DateTime?
+  image          String?
+  role           String?   @default("user")
+  accounts       Account[]
+  sessions       Session[]
+  posts          Post[]
+  reactedPosts   Post[]    @relation("reactedPosts")
+  supportedPosts Post[]    @relation("supportedPosts")
+}
+
+model Post {
+  id             Int     @id @default(autoincrement())
+  title          String
+  content        String?
+  published      Boolean @default(false)
+  userId         String?
+  authorId       String?
+  author         User?   @relation(fields: [authorId], references: [id])
+  reactedPosts   User[]  @relation("reactedPosts")
+  supportedPosts User[]  @relation("supportedPosts")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refreshToken      String?
+  accessToken       String?
+  tokenType         String?
+  expiresAt         Int?
+  scope             String?
+  idToken           String?
+  sessionState      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
