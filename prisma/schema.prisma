@@ -4,8 +4,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model User {
@@ -40,14 +41,14 @@ model Account {
   userId            String
   type              String
   provider          String
-  providerAccountId String
-  refreshToken      String?
-  accessToken       String?
-  tokenType         String?
-  expiresAt         Int?
+  providerAccountId Int
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
   scope             String?
-  idToken           String?
-  sessionState      String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
