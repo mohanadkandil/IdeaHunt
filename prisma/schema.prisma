@@ -26,9 +26,8 @@ model User {
 
 model Post {
   id             Int     @id @default(autoincrement())
-  title          String
-  content        String?
-  category       String?
+  content        String
+  category       String
   published      Boolean @default(false)
   userId         String?
   authorId       String?
