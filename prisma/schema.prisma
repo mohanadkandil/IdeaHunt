@@ -25,15 +25,16 @@ model User {
 }
 
 model Post {
-  id             Int     @id @default(autoincrement())
+  id             Int      @id @default(autoincrement())
+  created        DateTime @default(now())
   content        String
   category       String
-  published      Boolean @default(false)
+  published      Boolean  @default(false)
   userId         String?
   authorId       String?
-  author         User?   @relation(fields: [authorId], references: [id])
-  reactedPosts   User[]  @relation("reactedPosts")
-  supportedPosts User[]  @relation("supportedPosts")
+  author         User?    @relation(fields: [authorId], references: [id])
+  reactedPosts   User[]   @relation("reactedPosts")
+  supportedPosts User[]   @relation("supportedPosts")
 }
 
 model Account {

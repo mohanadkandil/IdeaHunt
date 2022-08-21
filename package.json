@@ -13,6 +13,7 @@
     "@prisma/client": "^4.2.1",
     "next": "12.2.5",
     "next-auth": "^4.10.3",
+    "node-jose-tools": "^1.6.28",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
