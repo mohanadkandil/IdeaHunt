@@ -5,8 +5,8 @@ import { getSession } from "next-auth/react"
 const prisma = new PrismaClient()
 
 export default async function like(req: NextApiRequest, res: NextApiResponse) {
-  const session = await getSession({ req })
-  const { userId } = session
+  const session = getSession({ req })
+  const { userId }: any = session
   const post = await prisma.post.findUnique({
     where: {
       id: req.body.postId,

@@ -15,7 +15,7 @@ export default async function handle(
     data: {
       content: content,
       topic: topic,
-      userName: session?.user?.name,
+      username: session?.user?.name,
       author: { connect: { email: String(session?.user?.email) } },
     },
   })

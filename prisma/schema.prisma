@@ -11,30 +11,19 @@ datasource db {
 
 model User {
   id             String    @id @default(cuid())
-  name           String
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  name           String?
   email          String?   @unique
   password       String?
-  emailVerfied   DateTime?
+  emailVerified  DateTime?
   image          String?
   role           String?   @default("user")
   accounts       Account[]
   sessions       Session[]
   posts          Post[]
-  reactedPosts   Post[]    @relation("reactedPosts")
+  likedPosts     Post[]    @relation("likedPosts")
   supportedPosts Post[]    @relation("supportedPosts")
-}
-
-model Post {
-  id             Int      @id @default(autoincrement())
-  created        DateTime @default(now())
-  content        String
-  topic          String
-  published      Boolean  @default(false)
-  userId         String?
-  authorId       String?
-  author         User?    @relation(fields: [authorId], references: [id])
-  reactedPosts   User[]   @relation("reactedPosts")
-  supportedPosts User[]   @relation("supportedPosts")
 }
 
 model Account {
@@ -42,7 +31,7 @@ model Account {
   userId            String
   type              String
   provider          String
-  providerAccountId Int
+  providerAccountId String
   refresh_token     String? @db.Text
   access_token      String? @db.Text
   expires_at        Int?
@@ -50,8 +39,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -62,4 +50,26 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Post {
+  id               String   @id @default(cuid())
+  created          DateTime @default(now())
+  userName         String?
+  title            String?
+  category         String?
+  author           User?    @relation(fields: [authorId], references: [id])
+  authorId         String?
+  likedByUsers     User[]   @relation("likedPosts")
+  supportedByUsers User[]   @relation("supportedPosts")
+
+  @@index([authorId])
 }
