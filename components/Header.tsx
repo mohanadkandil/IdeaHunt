@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <>
       <SignInPopup showPopup={showPopup} setShowPopup={setShowPopup} />
-      <div className="flex items-center justify-between py-5 px-16 w-full bg-[#3A3B43]">
+      <div className="flex items-center justify-between py-4 px-16 w-full bg-[#3A3B43]">
         <button onClick={() => router.push("/")}>
           <span className="text-white font-semibold text-3xl">
             Idea<span className="text-[#00C6C0]">H</span>unt
