@@ -25,7 +25,7 @@ export default function IdeasPage() {
         <Header />
         <div className="mt-10">
           <div className="flex p-5">
-            <div className="mr-20 ml-12 flex flex-col space-y-8">
+            <div className="mr-16 ml-12 flex flex-col space-y-8 h-full justify-center border-2 border-white bg-[#00C6C0] rounded-xl p-5">
               <button
                 onClick={() => router.push("/post")}
                 className="w-[170px] p-1 bg-white rounded-md text-lg font-semibold hover:bg-[#00B389] transition ease-in-out delay-150"

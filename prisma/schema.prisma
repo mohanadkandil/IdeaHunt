@@ -28,7 +28,7 @@ model Post {
   id             Int      @id @default(autoincrement())
   created        DateTime @default(now())
   content        String
-  category       String
+  topic          String
   published      Boolean  @default(false)
   userId         String?
   authorId       String?
