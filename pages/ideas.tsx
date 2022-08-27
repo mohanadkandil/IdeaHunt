@@ -34,10 +34,10 @@ export default function IdeasPage() {
               </button>
               <span className="text-white font-semibold text-sm">Sort by</span>
               <button className="w-[170px] p-1 bg-white rounded-md text-lg font-semibold hover:bg-[#00B389] transition ease-in-out delay-150">
-                🙋‍♂️I would use this
+                <span>🙋‍♂️I would use it</span>
               </button>
               <button className="w-[170px] p-1 text-center bg-white rounded-md text-lg font-semibold hover:bg-[#00B389] transition ease-in-out delay-150">
-                💰I will buy it
+                <span>💵I will buy it</span>
               </button>
               <button className="w-[170px] text-center p-1 bg-white rounded-md text-lg font-semibold hover:bg-[#00B389] transition ease-in-out delay-150">
                 Latest Ideas
