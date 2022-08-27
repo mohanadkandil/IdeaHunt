@@ -27,7 +27,7 @@ export default function IdeaCard({
             <span className="text-[25px]">🙋‍♂️</span>
           </button>
           <button className="w-11 h-11 flex items-center justify-center rounded-lg bg-[#2E2F37] hover:bg-[#00B389] transition ease-in-out delay-150">
-            <span className="text-[25px]">💰</span>
+            <span className="text-[25px] mb-1">💵</span>
           </button>
         </div>
       </div>
