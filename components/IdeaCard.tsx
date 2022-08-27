@@ -21,11 +21,11 @@ export default function IdeaCard({
           <p>{content}</p>
         </div>
         <div className="flex justify-center pt-3 space-x-4">
-          <button className="w-12 flex items-center justify-center h-12 rounded-lg bg-[#2E2F37] hover:bg-[#00B389] transition ease-in-out delay-150">
-            🙋‍♂️
+          <button className="w-11 border-1 border-white flex items-center justify-center h-11 rounded-lg bg-[#2E2F37] hover:bg-[#00B389] transition ease-in-out delay-150">
+            <span className="text-[25px]">🙋‍♂️</span>
           </button>
-          <button className="w-12 h-12 flex items-center justify-center rounded-lg bg-[#2E2F37] hover:bg-[#00B389] transition ease-in-out delay-150">
-            💰
+          <button className="w-11 h-11 flex items-center justify-center rounded-lg bg-[#2E2F37] hover:bg-[#00B389] transition ease-in-out delay-150">
+            <span className="text-[25px]">💰</span>
           </button>
         </div>
       </div>
