@@ -63,9 +63,9 @@ model VerificationToken {
 model Post {
   id               String   @id @default(cuid())
   created          DateTime @default(now())
-  userName         String?
-  title            String?
-  category         String?
+  username         String?
+  content          String?
+  topic            String?
   author           User?    @relation(fields: [authorId], references: [id])
   authorId         String?
   likedByUsers     User[]   @relation("likedPosts")
