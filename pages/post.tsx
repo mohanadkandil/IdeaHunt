@@ -3,9 +3,11 @@ import PostIdea from "../features/PostIdea"
 
 export default function Post() {
   return (
-    <div className="h-screen w-screen bg-[#2E2F37]">
+    <div className="h-full w-full bg-[#2E2F37]">
       <Header />
-      <PostIdea />
+      <div className="py-10">
+        <PostIdea />
+      </div>
     </div>
   )
 }
