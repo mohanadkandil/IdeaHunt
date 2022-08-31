@@ -19,7 +19,7 @@ export default function Header() {
         </button>
         {session && session.user ? (
           <button
-            onClick={() => router.push(`/user/${session.userId} `)}
+            onClick={() => router.push(`/profile/${session.userId} `)}
             className="w-[60px] h-[60px] rounded-full p-1 bg-white text-lg font-semibold hover:bg-[#00C6C0] transition ease-in-out delay-150"
           >
             <Image
