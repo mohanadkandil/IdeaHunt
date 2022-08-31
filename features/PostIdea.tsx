@@ -38,7 +38,7 @@ const PostIdea = () => {
           <span className="text-[#00B389] font-bold">idea</span>
         </span>
       </span>
-      <div className="mt-6 flex justify-center">
+      <div className="flex justify-center">
         <p className="text-lg text-white">
           Write about your idea and let&apos;s look at people votings!
         </p>

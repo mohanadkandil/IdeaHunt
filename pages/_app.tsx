@@ -6,7 +6,9 @@ import Header from "../components/Header"
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider session={pageProps.session}>
-      <Component {...pageProps} />
+      <div className="bg-[#2E2F37]">
+        <Component {...pageProps} />
+      </div>
     </SessionProvider>
   )
 }

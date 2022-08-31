@@ -4,12 +4,17 @@ import { NextApiRequest, NextApiResponse } from "next"
 const prisma = new PrismaClient()
 
 export default async function posts(req: NextApiRequest, res: NextApiResponse) {
-  const posts = prisma.post.findMany({
+  const posts = await prisma.post.findMany({
     orderBy: {
       created: "desc",
     },
     include: {
-      reactedPosts: {
+      likedByUsers: {
+        select: {
+          id: true,
+        },
+      },
+      supportedByUsers: {
         select: {
           id: true,
         },

@@ -19,13 +19,7 @@ export default function Profile() {
         </span>
         <div className="grid grid-rows-4 grid-flow-col gap-10">
           {ideasData.map((user, index) => (
-            <IdeaCard
-              key={index}
-              name={user?.name}
-              category={user?.category}
-              content={user?.content}
-              date={user?.date}
-            />
+            <IdeaCard post={post} />
           ))}
         </div>
       </div>

@@ -1,14 +1,24 @@
 import { useState, Fragment } from "react"
 import Header from "../components/Header"
 import IdeaCard from "../components/IdeaCard"
-import { ideasData } from "../data/ideas"
-import { Dialog, Transition } from "@headlessui/react"
-import { IoMdClose } from "react-icons/io"
 import { useRouter } from "next/router"
+import { useSession } from "next-auth/react"
+import useSWR from "swr"
 
 export default function IdeasPage() {
+  const [category, setCategory] = useState({ label: "all", value: "all" })
+  const { data: session, status } = useSession()
   const router = useRouter()
+  const [setShowPopup] = useState(false)
+  const [open, setOpen] = useState(false)
   let [isOpen, setIsOpen] = useState(false)
+
+  const fetcher = (...args: any[]) => fetch(...args).then((res) => res.json())
+
+  const { data: ideas, error } = useSWR("/api/posts", fetcher)
+
+  if (error) return console.log("failed to load")
+  if (!ideas) return console.log("loading...")
 
   function closeModal() {
     setIsOpen(false)
@@ -18,10 +28,11 @@ export default function IdeasPage() {
     setIsOpen(true)
   }
 
-  const [open, setOpen] = useState(false)
+  console.log(ideas)
+
   return (
     <>
-      <div className="h-screen w-screen bg-[#2E2F37]">
+      <div className="h-full w-full">
         <Header />
         <div className="mt-10">
           <div className="flex p-5">
@@ -44,14 +55,13 @@ export default function IdeasPage() {
               </button>
             </div>
             <div className="h-full w-full flex items-center flex-wrap gap-10">
-              {ideasData.map((user, index) => {
+              {ideas?.map((idea: object, index: number) => {
                 return (
                   <IdeaCard
                     key={index}
-                    name={user?.name}
-                    category={user?.category}
-                    content={user?.content}
-                    date={user?.date}
+                    post={idea}
+                    postId={idea}
+                    setShowPopup={setShowPopup}
                   />
                 )
               })}
