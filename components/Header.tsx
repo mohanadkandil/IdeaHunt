@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
 import SignInPopup from "./SignInPopup"
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signOut } from "next-auth/react"
 import Image from "next/image"
 export default function Header() {
   const router = useRouter()
@@ -18,18 +18,26 @@ export default function Header() {
           </span>
         </button>
         {session && session.user ? (
-          <button
-            onClick={() => router.push(`/profile/${session.userId} `)}
-            className="w-[60px] h-[60px] rounded-full p-1 bg-white text-lg font-semibold hover:bg-[#00C6C0] transition ease-in-out delay-150"
-          >
-            <Image
-              className="rounded-full"
-              src={session?.user?.image}
-              width="60px"
-              height="60px"
-              alt=""
-            />
-          </button>
+          <div>
+            <button
+              onClick={() => router.push(`/profile/${session.userId} `)}
+              className="w-[60px] h-[60px] rounded-full p-1 bg-white text-lg font-semibold hover:bg-[#00C6C0] transition ease-in-out delay-150"
+            >
+              <Image
+                src={session?.user?.image}
+                className="rounded-full"
+                width="60px"
+                height="60px"
+                alt=""
+              />
+            </button>
+            <button
+              onClick={() => signOut}
+              className="text-lg font-semibold hover:underline"
+            >
+              Sign out
+            </button>
+          </div>
         ) : null}
 
         {!session ? (

@@ -14,8 +14,6 @@ export default function Profile() {
   const { data: user, error } = useSWR(`/api/profile/${userId}`, fetcher)
   if (error) return <div>An error occured</div>
   if (!user) return <div>Loading....</div>
-  console.log(typeof user)
-  console.log(user?.posts)
   return (
     <div className="h-full w-full bg-[#2E2F37]">
       <Header />
