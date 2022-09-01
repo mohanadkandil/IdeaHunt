@@ -32,8 +32,8 @@ export default function IdeasPage() {
 
   return (
     <>
-      <div className="h-full w-full">
-        <Header />
+      <Header />
+      <div className="min-h-screen">
         <div className="mt-10">
           <div className="flex p-5">
             <div className="mr-16 ml-12 flex flex-col space-y-8 h-full justify-center border-2 border-white bg-[#00C6C0] rounded-xl p-5">

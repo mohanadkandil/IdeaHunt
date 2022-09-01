@@ -21,7 +21,7 @@ export default function Header() {
           <div className="flex items-center space-x-3">
             <button
               onClick={() => router.push(`/profile/${session.userId} `)}
-              className="w-[60px] h-[60px] rounded-full p-1 bg-white text-lg font-semibold hover:bg-[#00C6C0] transition ease-in-out delay-150"
+              className="w-[50px] h-[50px] rounded-full p-1 bg-white text-lg font-semibold hover:bg-[#00C6C0] transition ease-in-out delay-150"
             >
               <Image
                 src={session?.user?.image}
