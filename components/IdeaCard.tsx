@@ -62,12 +62,15 @@ export default function IdeaCard({ post, postId, setShowPopup }: Card) {
     }
   }
   return (
-    <div className="w-[420px] text-white h-[230px] cursor-pointer hover:border-[#00C6C0] border-2 bg-[#3A3B43] rounded-[10px] transition ease-in-out delay-150">
+    <div className="w-[350px] text-white h-[230px] hover:border-[#00C6C0] border-2 bg-[#3A3B43] rounded-[10px] transition ease-in-out delay-150">
       <div className="px-4 py-4">
         <div className="mb-4 h-[135px]">
           <div className="flex space-x-3 mb-6">
-            <button onClick={() => router.push(`/user/${authorId}`)}>
-              By <span className="text-[#00C6C0] font-medium">{username}</span>
+            <button onClick={() => router.push(`/profile/${authorId}`)}>
+              By{" "}
+              <span className="text-[#00C6C0] font-medium hover:underline">
+                {username}
+              </span>
             </button>
             <span>{topic}</span>
             <span>
