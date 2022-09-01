@@ -13,7 +13,7 @@ export default function ProfilePage() {
   return (
     <>
       <Header />
-      <div>
+      <div className="">
         <Profile user={user} />
       </div>
     </>

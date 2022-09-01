@@ -70,11 +70,11 @@ export default function IdeaCard({
   return (
     <div
       className={`${
-        isProfile ? "w-[350px] h-[150px]" : "w-[350px] h-[230px]"
+        isProfile ? "w-[350px] h-[150px] cursor-pointer" : "w-[350px] h-[230px]"
       } text-white hover:border-[#00C6C0] border-2 bg-[#3A3B43] rounded-[10px] transition ease-in-out delay-150`}
     >
       <div className={`${isProfile ? "px-4" : "px-4 py-4"}`}>
-        <div className={`${isProfile ? "" : "h-[135px]"}`}>
+        <div className={`${isProfile ? "" : "h-[135px] mb-4"}`}>
           {!isProfile ? (
             <div className="flex space-x-3 mb-6">
               <button onClick={() => router.push(`/profile/${authorId}`)}>

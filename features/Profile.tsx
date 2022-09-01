@@ -4,6 +4,7 @@ import IdeaCard from "../components/IdeaCard"
 
 const Profile = ({ user }) => {
   const [showPopup, setShowPopup] = useState(false)
+  console.log(user.posts)
 
   return (
     <>
@@ -24,12 +25,23 @@ const Profile = ({ user }) => {
             </>
           )
         })}
-        <span className="text-gray-100 font-semibold text-3xl">
-          Your{" "}
-          <span className="text-[#00C6C0] font-semibold text-3xl">
-            Ideas 🚀
+        {user?.posts.length ? (
+          <span className="text-gray-100 font-semibold text-3xl">
+            Your{" "}
+            <span className="text-[#00C6C0] font-semibold text-3xl">
+              Ideas 🚀
+            </span>
           </span>
-        </span>
+        ) : null}
+
+        {!user.posts.length ? (
+          <span className="text-gray-100 font-semibold text-3xl">
+            Let&apos;s post your{" "}
+            <span className="text-[#00C6C0] font-semibold text-3xl">
+              Idea 🚀
+            </span>
+          </span>
+        ) : null}
       </div>
       <div className="grid grid-rows-2 grid-flow-col gap-5 justify-center py-5">
         {user?.posts?.map((post: any, index: number) => (
