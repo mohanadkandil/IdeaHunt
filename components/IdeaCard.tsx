@@ -18,9 +18,15 @@ type Card = {
   post: any
   postId: any
   setShowPopup: any
+  isProfile: boolean
 }
 
-export default function IdeaCard({ post, postId, setShowPopup }: Card) {
+export default function IdeaCard({
+  isProfile,
+  post,
+  postId,
+  setShowPopup,
+}: Card) {
   const [data, setData] = useState(post)
   const router = useRouter()
   const { data: session, status } = useSession()
@@ -62,42 +68,51 @@ export default function IdeaCard({ post, postId, setShowPopup }: Card) {
     }
   }
   return (
-    <div className="w-[350px] text-white h-[230px] hover:border-[#00C6C0] border-2 bg-[#3A3B43] rounded-[10px] transition ease-in-out delay-150">
-      <div className="px-4 py-4">
-        <div className="mb-4 h-[135px]">
-          <div className="flex space-x-3 mb-6">
-            <button onClick={() => router.push(`/profile/${authorId}`)}>
-              By{" "}
-              <span className="text-[#00C6C0] font-medium hover:underline">
-                {username}
+    <div
+      className={`${
+        isProfile ? "w-[350px] h-[150px]" : "w-[350px] h-[230px]"
+      } text-white hover:border-[#00C6C0] border-2 bg-[#3A3B43] rounded-[10px] transition ease-in-out delay-150`}
+    >
+      <div className={`${isProfile ? "px-4" : "px-4 py-4"}`}>
+        <div className={`${isProfile ? "" : "h-[135px]"}`}>
+          {!isProfile ? (
+            <div className="flex space-x-3 mb-6">
+              <button onClick={() => router.push(`/profile/${authorId}`)}>
+                By{" "}
+                <span className="text-[#00C6C0] font-medium hover:underline">
+                  {username}
+                </span>
+              </button>
+              <span>{topic}</span>
+              <span>
+                {formatDistanceToNow(new Date(created)).replace("about", "")}{" "}
+                ago
               </span>
-            </button>
-            <span>{topic}</span>
-            <span>
-              {formatDistanceToNow(new Date(created)).replace("about", "")} ago
-            </span>
-          </div>
+            </div>
+          ) : null}
           <div className="my-7">
             <p>{content}</p>
           </div>
         </div>
-        <div className="flex justify-center space-x-4">
-          <button
-            onClick={() => handlePostReactions("like")}
-            className="w-11 h-11 flex items-center justify-center rounded-lg bg-[#2E2F37] hover:bg-white/80 transition ease-in-out delay-150"
-          >
-            <span className="text-[25px]">😐</span>
-          </button>
-          <button className="w-11 flex items-center justify-center h-11 rounded-lg bg-[#2E2F37] hover:bg-white/80 transition ease-in-out delay-150">
-            <span className="text-[25px]">💡</span>
-          </button>
-          <button
-            onClick={() => handlePostReactions("support")}
-            className="w-11 flex items-center justify-center h-11 rounded-lg bg-[#2E2F37] hover:bg-white/80 transition ease-in-out delay-150"
-          >
-            <span className="text-[25px]">🤑</span>
-          </button>
-        </div>
+        {!isProfile ? (
+          <div className="flex justify-center space-x-4">
+            <button
+              onClick={() => handlePostReactions("like")}
+              className="w-11 h-11 flex items-center justify-center rounded-lg bg-[#2E2F37] hover:bg-[#00C6C0]"
+            >
+              <span className="text-[25px]">😐</span>
+            </button>
+            <button className="w-11 flex items-center justify-center h-11 rounded-lg bg-[#2E2F37] hover:bg-[#00C6C0]">
+              <span className="text-[25px]">💡</span>
+            </button>
+            <button
+              onClick={() => handlePostReactions("support")}
+              className="w-11 flex items-center justify-center h-11 rounded-lg bg-[#2E2F37] hover:bg-[#00C6C0]"
+            >
+              <span className="text-[25px]">🤑</span>
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   )
