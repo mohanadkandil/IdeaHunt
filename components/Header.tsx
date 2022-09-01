@@ -18,7 +18,7 @@ export default function Header() {
           </span>
         </button>
         {session && session.user ? (
-          <div>
+          <div className="flex items-center space-x-3">
             <button
               onClick={() => router.push(`/profile/${session.userId} `)}
               className="w-[60px] h-[60px] rounded-full p-1 bg-white text-lg font-semibold hover:bg-[#00C6C0] transition ease-in-out delay-150"
@@ -32,8 +32,8 @@ export default function Header() {
               />
             </button>
             <button
-              onClick={() => signOut}
-              className="text-lg font-semibold hover:underline"
+              onClick={() => signOut()}
+              className="text-lg text-white font-semibold hover:underline hover:decoration-[#00C6C0]"
             >
               Sign out
             </button>
