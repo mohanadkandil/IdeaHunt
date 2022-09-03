@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Suspense, useState } from "react"
 import IdeaCard from "../components/IdeaCard"
 import useSWR from "swr"
+import ProfileCard from "../components/ProfileCard"
 
 export const Profile = ({ userId }: { userId: string }) => {
   const [showPopup, setShowPopup] = useState(false)
@@ -51,13 +52,7 @@ export const Profile = ({ userId }: { userId: string }) => {
       </div>
       <div className="grid grid-rows-2 grid-flow-col gap-5 justify-center py-5">
         {user?.posts?.map((post: any, index: number) => (
-          <IdeaCard
-            isProfile={true}
-            key={index}
-            post={post}
-            postId={post.id}
-            setShowPopup={setShowPopup}
-          />
+          <ProfileCard post={post} key={index} />
         ))}
       </div>
     </>
@@ -74,7 +69,7 @@ export const ProfileLoading = () => {
       <div className="grid grid-rows-2 grid-flow-col gap-5 justify-center py-5">
         {[...Array(4)].map((_, index) => (
           <div
-            className="w-[350px] h-[230px] bg-gray-100 animate-pulse rounded-[10px]"
+            className="w-[400px] h-[270px] bg-gray-100 animate-pulse rounded-[10px]"
             key={index}
           ></div>
         ))}

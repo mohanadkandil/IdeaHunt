@@ -10,8 +10,8 @@ export default function ProfilePage() {
   return (
     <>
       <Header />
-      <Suspense fallback={<Profile userId={userId} />}>
-        <ProfileLoading />
+      <Suspense fallback={<ProfileLoading />}>
+        <Profile userId={userId} />
       </Suspense>
     </>
   )
