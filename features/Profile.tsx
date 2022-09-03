@@ -1,10 +1,16 @@
 import Image from "next/image"
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import IdeaCard from "../components/IdeaCard"
+import useSWR from "swr"
 
-const Profile = ({ user }) => {
+export const Profile = ({ userId }: { userId: string }) => {
   const [showPopup, setShowPopup] = useState(false)
-  console.log(user.posts)
+  const fetcher = (...args) => fetch(...args).then((res) => res.json())
+  const { data: user, error } = useSWR(`/api/profile/${userId}`, fetcher, {
+    suspense: true,
+  })
+  if (error) return <div>An error occured</div>
+  if (!user) return <div>Loading....</div>
 
   return (
     <>
@@ -25,7 +31,7 @@ const Profile = ({ user }) => {
             </>
           )
         })}
-        {user?.posts.length ? (
+        {user?.posts?.length ? (
           <span className="text-gray-100 font-semibold text-3xl">
             Your{" "}
             <span className="text-[#00C6C0] font-semibold text-3xl">
@@ -34,7 +40,7 @@ const Profile = ({ user }) => {
           </span>
         ) : null}
 
-        {!user.posts.length ? (
+        {!user?.posts?.length ? (
           <span className="text-gray-100 font-semibold text-3xl">
             Let&apos;s post your{" "}
             <span className="text-[#00C6C0] font-semibold text-3xl">
@@ -58,4 +64,21 @@ const Profile = ({ user }) => {
   )
 }
 
-export default Profile
+export const ProfileLoading = () => {
+  return (
+    <>
+      <div className="flex flex-col justify-center items-center space-y-5 py-10">
+        <div className="w-[222px] h-[222px] rounded-full bg-gray-100 animate-pulse" />
+        <div className="bg-gray-100 w-64 h-8 animate-pulse"></div>
+      </div>
+      <div className="grid grid-rows-2 grid-flow-col gap-5 justify-center py-5">
+        {[...Array(4)].map((_, index) => (
+          <div
+            className="w-[350px] h-[230px] bg-gray-100 animate-pulse rounded-[10px]"
+            key={index}
+          ></div>
+        ))}
+      </div>
+    </>
+  )
+}

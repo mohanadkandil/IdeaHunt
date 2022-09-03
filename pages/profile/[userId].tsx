@@ -1,21 +1,18 @@
 import { useRouter } from "next/router"
-import useSWR from "swr"
+import { Suspense } from "react"
 import Header from "../../components/Header"
-import Profile from "../../features/Profile"
+import { Profile, ProfileLoading } from "../../features/Profile"
 
 export default function ProfilePage() {
   const router = useRouter()
   const { userId } = router.query
-  const fetcher = (...args) => fetch(...args).then((res) => res.json())
-  const { data: user, error } = useSWR(`/api/profile/${userId}`, fetcher)
-  if (error) return <div>An error occured</div>
-  if (!user) return <div>Loading....</div>
+
   return (
     <>
       <Header />
-      <div className="">
-        <Profile user={user} />
-      </div>
+      <Suspense fallback={<Profile userId={userId} />}>
+        <ProfileLoading />
+      </Suspense>
     </>
   )
 }
