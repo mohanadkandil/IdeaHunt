@@ -1,11 +1,8 @@
 import Image from "next/image"
-import { Suspense, useState } from "react"
-import IdeaCard from "../components/IdeaCard"
 import useSWR from "swr"
 import ProfileCard from "../components/ProfileCard"
 
 export const Profile = ({ userId }: { userId: string }) => {
-  const [showPopup, setShowPopup] = useState(false)
   const fetcher = (...args) => fetch(...args).then((res) => res.json())
   const { data: user, error } = useSWR(`/api/profile/${userId}`, fetcher, {
     suspense: true,
